@@ -1,0 +1,28 @@
+version: '3.5'
+
+services:
+  db:
+    image: postgres
+    volumes:
+      - ./tmp/db:/var/lib/postgresql/data
+    networks:
+      - app-network
+  web:
+    build: .
+    command: npm start
+    volumes: 
+      - .:/app
+    ports:
+      - "3000:3000"
+    environment:
+      DATABASE_PASSWORD: postgres://postgres@db
+      CIVIS_SERVICE_PORT: 3000
+      DEBUG: silver-sockets:*
+    depends_on:
+      - db
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
