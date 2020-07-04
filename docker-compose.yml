@@ -5,24 +5,37 @@ services:
     image: postgres
     volumes:
       - ./tmp/db:/var/lib/postgresql/data
-    networks:
-      - app-network
-  web:
-    build: .
-    command: npm start
-    volumes: 
-      - .:/app
+      - ./scripts/init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "5432:5432"
+  back_end:
+    build: './back_end'
+    command: ["./scripts/wait_for_postgres.sh", "npm", "run", "dev"]
+    volumes:
+      - ./back_end:/app
+      - '/app/node_modules'
+    ports:
+      - "3001:3001"
+    environment:
+      DATABASE_PASSWORD: postgres://root:root@db:5432/silver_sockets
+      TEST_DATABASE_PASSWORD: postgres://root:root@db:5432/silver_sockets_test
+      CIVIS_SERVICE_PORT: 3001
+      PORT: 3001
+    env_file:
+      - ./secrets/GOOGLE_OAUTH
+      - ./secrets/FACEBOOK_OAUTH
+      - ./secrets/TWITTER_OAUTH
+    depends_on:
+      - db
+  front_end:
+    build: './front_end'
+    command: ["npm", "start"]
+    volumes:
+      - ./front_end:/app
+      - '/app/node_modules'
     ports:
       - "3000:3000"
     environment:
-      DATABASE_PASSWORD: postgres://postgres@db
-      CIVIS_SERVICE_PORT: 3000
-      DEBUG: silver-sockets:*
-    depends_on:
-      - db
-    networks:
-      - app-network
-
-networks:
-  app-network:
-    driver: bridge
+      PORT: 3000
+      CHOKIDAR_USEPOLLING: "true"
+      CI: "true"

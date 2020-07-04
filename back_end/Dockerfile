@@ -1,7 +1,10 @@
-FROM node:12
+FROM node:14-alpine
+
+# Make psql available
+RUN apk --update add postgresql-client && rm -rf /var/cache/apk/*
 
 # Create app dir
-WORKDIR /usr/src/app
+WORKDIR /app
 
 # Install app dependencies
 # A wildcard is used to ensure both package.json AND package-lock.json are copied
@@ -15,6 +18,6 @@ RUN npm install
 # Bundle app source
 COPY . .
 
-EXPOSE 3000
+EXPOSE 3001
 
 CMD [ "npm", "start" ]
