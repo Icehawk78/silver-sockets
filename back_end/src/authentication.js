@@ -1,25 +1,28 @@
 const axios = require('axios');
-const { AuthenticationService, JWTStrategy } = require('@feathersjs/authentication');
-const { expressOauth, OAuthStrategy } = require('@feathersjs/authentication-oauth');
+const {
+  AuthenticationService,
+  JWTStrategy
+} = require('@feathersjs/authentication');
+const {
+  expressOauth,
+  OAuthStrategy
+} = require('@feathersjs/authentication-oauth');
 // const logger = require('./logger');
 
 class GoogleStrategy extends OAuthStrategy {
   async getEntityData(profile) {
     const baseData = await super.getEntityData(profile);
     // logger.log('info', profile);
-    // logger.log('info', baseData);
     return {
       ...baseData,
-      // You can also set the display name to profile.name
       displayName: profile.name,
-      // The user email address (if available)
-      email: profile.email,
+      email: profile.email
     };
   }
 }
 
 class FacebookStrategy extends OAuthStrategy {
-  async getProfile (authResult) {
+  async getProfile(authResult) {
     // This is the oAuth access token that can be used
     // for Facebook API requests as the Bearer token
     const accessToken = authResult.access_token;
@@ -42,8 +45,8 @@ class FacebookStrategy extends OAuthStrategy {
 
     return {
       ...baseData,
-      displayName:  profile.name,
-      email: profile.email,
+      displayName: profile.name,
+      email: profile.email
     };
   }
 }

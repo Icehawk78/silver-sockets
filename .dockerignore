@@ -1,3 +1,4 @@
 node_modules
 npm-debug.log
-
+back_end/node_modules
+front_end/node_modules

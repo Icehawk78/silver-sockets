@@ -1,4 +1,4 @@
 {
-  "host": "silver-sockets-app.feathersjs.com",
+  "host": "silver-sockets-ui.herokuapp.com",
   "port": "PORT"
 }

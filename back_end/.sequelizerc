@@ -6,4 +6,3 @@ module.exports = {
   'seeders-path': path.resolve('migrations/seeders'),
   'models-path': path.resolve('migrations/models.js')
 };
-

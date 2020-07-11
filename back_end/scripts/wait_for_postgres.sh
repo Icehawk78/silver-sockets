@@ -6,7 +6,7 @@ set -e
 cmd="$@"
 
 echo "Waiting for Postgres"
-until psql $DATABASE_PASSWORD -c '\q' &> /dev/null; do
+until psql $DATABASE_URL -c '\q' &> /dev/null; do
   sleep 1
 done
 
