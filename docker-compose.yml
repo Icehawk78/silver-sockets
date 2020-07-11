@@ -7,20 +7,22 @@ services:
       - ./tmp/db:/var/lib/postgresql/data
       - ./scripts/init.sql:/docker-entrypoint-initdb.d/init.sql
     ports:
-      - "5432:5432"
+      - '5432:5432'
   back_end:
     build: './back_end'
-    command: ["./scripts/wait_for_postgres.sh", "npm", "run", "dev"]
+    command: ['./scripts/wait_for_postgres.sh', 'npm', 'run', 'dev']
     volumes:
       - ./back_end:/app
       - '/app/node_modules'
     ports:
-      - "3001:3001"
+      - '3001:3001'
     environment:
-      DATABASE_PASSWORD: postgres://root:root@db:5432/silver_sockets
-      TEST_DATABASE_PASSWORD: postgres://root:root@db:5432/silver_sockets_test
+      DATABASE_URL: postgres://root:root@db:5432/silver_sockets
+      TEST_DATABASE_URL: postgres://root:root@db:5432/silver_sockets_test
       CIVIS_SERVICE_PORT: 3001
       PORT: 3001
+      ROOT_URL: http://localhost:3000
+      DEBUG: '@feathersjs/authentication*'
     env_file:
       - ./secrets/GOOGLE_OAUTH
       - ./secrets/FACEBOOK_OAUTH
@@ -29,13 +31,28 @@ services:
       - db
   front_end:
     build: './front_end'
-    command: ["npm", "start"]
+    command: ['npm', 'start']
     volumes:
       - ./front_end:/app
       - '/app/node_modules'
     ports:
-      - "3000:3000"
+      - '3000:3000'
     environment:
       PORT: 3000
-      CHOKIDAR_USEPOLLING: "true"
-      CI: "true"
+      REACT_APP_BACK_END_URL: http://localhost:3001
+      CHOKIDAR_USEPOLLING: 'true'
+      CI: 'true'
+  full_stack:
+    build: '.'
+    command: ['./scripts/wait_for_postgres.sh', 'npm', 'run', 'dev']
+    ports:
+      - '3002:3002'
+    environment:
+      PORT: 3002
+      DATABASE_URL: postgres://root:root@db:5432/silver_sockets
+      ROOT_URL: /
+      REACT_APP_BACK_END_URL: /
+    env_file:
+      - ./secrets/GOOGLE_OAUTH
+    depends_on:
+      - db

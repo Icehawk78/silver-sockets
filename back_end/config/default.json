@@ -15,7 +15,7 @@
       "header": {
         "typ": "access"
       },
-      "audience": "http://localhost:3000",
+      "audience": "ROOT_URL",
       "issuer": "feathers",
       "algorithm": "HS256",
       "expiresIn": "1d"
@@ -25,7 +25,7 @@
       "passwordField": "password"
     },
     "oauth": {
-      "redirect": "http://localhost:3000",
+      "redirect": "ROOT_URL",
       "google": {
         "key": "GOOGLE_CLIENT_ID",
         "secret": "GOOGLE_CLIENT_SECRET",
@@ -39,5 +39,5 @@
       }
     }
   },
-  "postgres": "DATABASE_PASSWORD"
+  "postgres": "DATABASE_URL"
 }
