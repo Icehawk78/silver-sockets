@@ -1,8 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import logo from "./logo.svg";
-// import { Counter } from "./features/counter/Counter";
+import { ThemeProvider } from "@material-ui/core/styles";
+import { createMuiTheme } from "@material-ui/core/styles";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
+import cyan from "@material-ui/core/colors/cyan";
 import { Lobby } from "./features/lobby/Lobby";
+import { Login } from "./features/authentication/Login";
 import { login, logout } from "./features/authentication/authenticationSlice";
 import client from "./app/feather";
 import "./App.css";
@@ -14,10 +17,24 @@ function App() {
   const currentUser = useSelector(state => state.authentication.currentUser);
   const [showLobby, setShowLobby] = useState(true);
   const dispatch = useDispatch();
-
-  const doStuff = () => {
-    setShowLobby(!showLobby);
-  };
+  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
+  const theme = useMemo(
+    () =>
+      createMuiTheme({
+        palette: {
+          type: prefersDarkMode ? "dark" : "light",
+          primary: {
+            main: cyan[100]
+          },
+          secondary: {
+            main: cyan[900]
+          },
+          contrastThreshold: 5,
+          tonalOffset: 0.1
+        }
+      }),
+    [prefersDarkMode]
+  );
 
   useEffect(() => {
     client.authenticate().catch(x => {
@@ -28,6 +45,7 @@ function App() {
 
   useEffect(() => {
     const handleLogin = authData => {
+      console.log(authData);
       dispatch(login(authData));
     };
     client.on("authenticated", handleLogin);
@@ -46,28 +64,27 @@ function App() {
     };
   }, [dispatch]);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <button onClick={() => doStuff()}>Toggle Lobby</button>
-      </header>
-      {isAuthenticated && (
-        <div>
+    <ThemeProvider theme={theme}>
+      <div className="App">
+        {!isAuthenticated && <Login />}
+        {isAuthenticated && (
           <div>
-            <p>Logged in as: {currentUser.displayName}</p>
-            <button onClick={() => client.logout()}>Logout</button>
+            <div>
+              <p>Logged in as: {currentUser.displayName}</p>
+              <button onClick={() => client.logout()}>Logout</button>
+            </div>
+            <button
+              onClick={() => {
+                setShowLobby(!showLobby);
+              }}
+            >
+              Toggle Lobby
+            </button>
+            {showLobby && <Lobby />}
           </div>
-          {showLobby && <Lobby />}
-        </div>
-      )}
-      {!isAuthenticated && (
-        <div>
-          <a href={`${process.env.REACT_APP_BACK_END_URL}/oauth/google`}>
-            <img src="/google_signin.png" alt="Log in with Google" />
-          </a>
-        </div>
-      )}
-    </div>
+        )}
+      </div>
+    </ThemeProvider>
   );
 }
 

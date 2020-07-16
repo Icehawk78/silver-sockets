@@ -37,6 +37,6 @@ export const {
 
 export const selectGameUuids = state => Object.keys(state.games.games);
 export const selectGames = state => Object.values(state.games.games);
-export const selectGame = (state, uuid) => state.games[uuid];
+export const selectGame = (state, uuid) => state.games.games[uuid];
 
 export default gamesSlice.reducer;

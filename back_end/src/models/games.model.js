@@ -1,7 +1,9 @@
 // See http://docs.sequelizejs.com/en/latest/docs/models-definition/
 // for more of what you can do here.
 const Sequelize = require('sequelize');
+const { Op } = require('sequelize');
 const DataTypes = Sequelize.DataTypes;
+const { TOTAL_ROUNDS } = require('../services/games/games.const');
 
 module.exports = function(app) {
   const sequelizeClient = app.get('sequelizeClient');
@@ -30,6 +32,28 @@ module.exports = function(app) {
         },
         async afterCreate(createdObject) {
           await createdObject.reload();
+        }
+      },
+      scopes: {
+        unfinished: {
+          where: {
+            [Op.or]: {
+              currentRound: { [Op.lte]: TOTAL_ROUNDS },
+              isStarted: false
+            }
+          }
+        },
+        includesUser(userUuid) {
+          return {
+            include: [
+              {
+                attributes: [],
+                model: app.service('players').Model,
+                where: { userUuid: userUuid },
+                required: true
+              }
+            ]
+          };
         }
       }
     }

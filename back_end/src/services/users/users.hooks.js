@@ -1,13 +1,34 @@
 const { authenticate } = require('@feathersjs/authentication').hooks;
+const { fastJoin } = require('feathers-hooks-common');
 
-// const nestedProps = context => {
-//   if (!context.params.sequelize) context.params.sequelize = {};
-//   Object.assign(context.params.sequelize, {
-//     include: [{ all: true }],
-//     raw: false
-//   });
-//   return context;
-// };
+const userResolvers = {
+  joins: {
+    player: () => async (user, context) => {
+      user.player = (
+        await context.app.service('players').find({
+          query: { userUuid: user.uuid },
+          paginate: false
+        })
+      )[0];
+    },
+    game: $select => async (user, context) => {
+      user.game = (
+        await context.app.service('games').find({
+          query: { $select: $select },
+          sequelize: {
+            scope: ['unfinished', { method: ['includesUser', user.uuid] }]
+          },
+          paginate: false
+        })
+      )[0];
+    }
+  }
+};
+
+const query = {
+  game: [['uuid', 'isStarted', 'currentRound']],
+  player: true
+};
 
 module.exports = {
   before: {
@@ -21,7 +42,7 @@ module.exports = {
   },
 
   after: {
-    all: [],
+    all: [fastJoin(userResolvers, query)],
     find: [],
     get: [],
     create: [],

@@ -1,16 +1,21 @@
 const { Service } = require('feathers-sequelize');
-const { Locations } = require('../cards/cards.class');
-
-const VILLAGE_COUNT = 4;
-const STARTING_CARDS_PER_VILLAGE = 5;
-const NUMBERS_COUNT = 14;
-const MIN_PLAYERS = 2;
-const MAX_PLAYERS = 4;
-// const TOTAL_ROUNDS = 4;
+const { locations } = require('../cards/cards.const');
+const {
+  VILLAGE_COUNT,
+  STARTING_CARDS_PER_VILLAGE,
+  NUMBERS_COUNT,
+  MIN_PLAYERS,
+  MAX_PLAYERS
+  // TOTAL_ROUNDS
+} = require('./games.const');
 
 exports.Games = class Games extends Service {
   setup(app) {
     this.app = app;
+  }
+
+  getNumbers() {
+    return NUMBERS_COUNT;
   }
 
   async cardNumbers() {
@@ -125,20 +130,20 @@ exports.Games = class Games extends Service {
         orderNumber++
       ) {
         cards.patch(currentCards[currentIndex].uuid, {
-          location: Locations.getVillage(village),
+          location: locations.getVillage(village),
           orderNumber: orderNumber
         });
         currentIndex++;
       }
     }
     cards.patch(currentCards[currentIndex].uuid, {
-      location: Locations.DISCARD,
+      location: locations.DISCARD,
       orderNumber: 0
     });
     currentIndex++;
     for (currentIndex; currentIndex < currentCards.length; currentIndex++) {
       cards.patch(currentCards[currentIndex].uuid, {
-        location: Locations.DECK,
+        location: locations.DECK,
         orderNumber:
           currentIndex - VILLAGE_COUNT * STARTING_CARDS_PER_VILLAGE + 1
       });
@@ -165,7 +170,7 @@ exports.Games = class Games extends Service {
   //
   //   const cards = this.app.service('cards');
   //   const currentVillage = cards.find({
-  //     query: { location: Locations.getVillage(currentPlayer.orderNumber) }
+  //     query: { location: locations.getVillage(currentPlayer.orderNumber) }
   //   });
   // }
 };

@@ -56,7 +56,7 @@ export function MessageList() {
           <tbody>
             {messages.map(message => {
               return (
-                <tr>
+                <tr key={message.uuid}>
                   <td>{message.user && message.user.displayName}</td>
                   <td>{message.text}</td>
                   <td>
