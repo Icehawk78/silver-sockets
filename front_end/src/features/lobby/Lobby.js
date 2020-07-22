@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { loadMessages } from "./lobbySlice";
-import { loadGames, loadPlayers } from "./gamesSlice";
+import { loadGames, loadPlayers } from "../gameList/gamesSlice";
 import { selectIsAuthenticated } from "../authentication/authenticationSlice";
 import client from "../../app/feather";
-// import styles from "./Lobby.module.css";
-import { GameList } from "./GameList";
+import { Grid } from "@material-ui/core";
+import { GameList } from "../gameList/GameList";
 import { MessageList } from "./MessageList";
 
 export function Lobby() {
@@ -20,7 +20,7 @@ export function Lobby() {
       const loadCalls = [
         messageService.find(),
         gameService.find(),
-        playerService.find()
+        playerService.find(),
       ];
       Promise.all(loadCalls).then(
         ([messagesResults, gamesResults, playerResults]) => {
@@ -45,9 +45,9 @@ export function Lobby() {
   }, [dispatch, gameService, isAuthenticated, messageService, playerService]);
 
   return (
-    <div>
+    <Grid container>
       <GameList />
       <MessageList />
-    </div>
+    </Grid>
   );
 }

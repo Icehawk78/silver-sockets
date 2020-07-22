@@ -1,14 +1,26 @@
 import { configureStore } from "@reduxjs/toolkit";
-import counterReducer from "../features/counter/counterSlice";
 import lobbyReducer from "../features/lobby/lobbySlice";
-import gamesReducer from "../features/lobby/gamesSlice";
+import gamesReducer from "../features/gameList/gamesSlice";
 import authenticationReducer from "../features/authentication/authenticationSlice";
+import themeReducer from "../features/themes/themeSlice";
+
+const loadState = () => {
+  try {
+    const serializedState = localStorage.getItem("redux.state");
+    if (serializedState === null) {
+      return undefined;
+    }
+    return JSON.parse(serializedState);
+  } catch (err) {
+    return undefined;
+  }
+};
 
 export default configureStore({
   reducer: {
-    counter: counterReducer,
     lobby: lobbyReducer,
     games: gamesReducer,
-    authentication: authenticationReducer
-  }
+    authentication: authenticationReducer,
+    theme: themeReducer,
+  },
 });

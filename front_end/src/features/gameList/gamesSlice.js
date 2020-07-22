@@ -16,6 +16,10 @@ export const gamesSlice = createSlice({
     updateGame: (state, action) => {
       state.games[action.payload.uuid] = action.payload;
     },
+    updateGameAttribute: (state, action) => {
+      state.games[action.payload.uuid][action.payload.attribute] =
+        action.payload.value;
+    },
     removeGame: (state, action) => {
       delete state.games[action.payload.uuid];
     },
@@ -31,6 +35,7 @@ export const gamesSlice = createSlice({
 export const {
   loadGames,
   updateGame,
+  updateGameAttribute,
   removeGame,
   loadPlayers
 } = gamesSlice.actions;

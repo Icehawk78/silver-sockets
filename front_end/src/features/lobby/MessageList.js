@@ -1,8 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { addMessage, removeMessage, selectMessages } from "./lobbySlice";
+import {
+  Grid,
+  Button,
+  TextField,
+  Paper,
+  TableContainer,
+  Table,
+  TableHead,
+  TableBody,
+  TableRow,
+  TableCell,
+} from "@material-ui/core";
 import client from "../../app/feather";
-import styles from "./Lobby.module.css";
 
 export function MessageList() {
   const messages = useSelector(selectMessages);
@@ -11,11 +22,11 @@ export function MessageList() {
   const messageService = client.service("messages");
 
   useEffect(() => {
-    const addMessageListener = message => {
+    const addMessageListener = (message) => {
       console.log(message);
       dispatch(addMessage(message));
     };
-    const removeMessageListener = message => {
+    const removeMessageListener = (message) => {
       console.log(message);
       dispatch(removeMessage(message));
     };
@@ -29,50 +40,50 @@ export function MessageList() {
   }, [dispatch, messageService]);
 
   return (
-    <div>
-      <div className={styles.row}>
-        <input
-          className={styles.textbox}
+    <Grid item container xs={6}>
+      <Grid item xs={12}>
+        <TextField
           aria-label="Send message"
+          label="Send message"
           value={message}
-          onChange={e => setMessage(e.target.value)}
+          onChange={(e) => setMessage(e.target.value)}
         />
-        <button
-          className={styles.button}
-          onClick={() => messageService.create({ text: message })}
-        >
+        <Button onClick={() => messageService.create({ text: message })}>
           Create Message
-        </button>
-      </div>
-      <div className={styles.row}>
-        <table className={styles.table} style={{ border: "black 1px solid" }}>
-          <thead>
-            <tr>
-              <th>User</th>
-              <th>Message</th>
-              <th>Remove?</th>
-            </tr>
-          </thead>
-          <tbody>
-            {messages.map(message => {
-              return (
-                <tr key={message.uuid}>
-                  <td>{message.user && message.user.displayName}</td>
-                  <td>{message.text}</td>
-                  <td>
-                    <button
-                      className={styles.button}
-                      onClick={() => messageService.remove(message.uuid)}
-                    >
-                      x
-                    </button>
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-      </div>
-    </div>
+        </Button>
+      </Grid>
+      <Grid xs={12}>
+        <TableContainer component={Paper}>
+          <Table size="small">
+            <TableHead>
+              <TableRow>
+                <TableCell>User</TableCell>
+                <TableCell>Message</TableCell>
+                <TableCell />
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {messages.map((message) => {
+                return (
+                  <TableRow key={message.uuid}>
+                    <TableCell>
+                      {message.user && message.user.displayName}
+                    </TableCell>
+                    <TableCell>{message.text}</TableCell>
+                    <TableCell>
+                      <Button
+                        onClick={() => messageService.remove(message.uuid)}
+                      >
+                        x
+                      </Button>
+                    </TableCell>
+                  </TableRow>
+                );
+              })}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </Grid>
+    </Grid>
   );
 }
