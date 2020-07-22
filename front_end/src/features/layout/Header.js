@@ -1,13 +1,10 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { AppBar, Toolbar, IconButton, Typography } from "@material-ui/core";
-import { AccountCircle, Menu as MenuIcon } from "@material-ui/icons";
+import { Menu as MenuIcon } from "@material-ui/icons";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
-import clsx from "clsx";
 import { ThemePicker } from "../themes/Themes";
 import { ProfileMenu } from "../authentication/ProfileMenu";
-
-const useStyles = makeStyles((theme) => ({}));
 
 export const Header = (props) => {
   const useStyles = makeStyles((theme) => ({
@@ -29,8 +26,6 @@ export const Header = (props) => {
   const isAuthenticated = useSelector(
     (state) => state.authentication.isAuthenticated
   );
-  const currentUser = useSelector((state) => state.authentication.currentUser);
-  const dispatch = useDispatch();
 
   return (
     <AppBar position="sticky">

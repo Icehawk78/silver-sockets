@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useEffect, useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { ThemeProvider } from "@material-ui/core/styles";
-import { Button, Grid, CssBaseline, Typography } from "@material-ui/core";
+import { CssBaseline } from "@material-ui/core";
 import { Lobby } from "./features/lobby/Lobby";
 import { Login } from "./features/authentication/Login";
 import { Header } from "./features/layout/Header";
@@ -15,7 +15,6 @@ function App() {
     (state) => state.authentication.isAuthenticated
   );
   const dispatch = useDispatch();
-  const currentUser = useSelector((state) => state.authentication.currentUser);
   const isDarkMode = useSelector((state) => state.theme.isDarkMode);
   const hue = useSelector((state) => state.theme.hue);
   const theme = useMemo(() => getTheme(hue, isDarkMode), [hue, isDarkMode]);

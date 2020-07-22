@@ -10,7 +10,7 @@ import {
   Button,
 } from "@material-ui/core";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import client from "../../app/feather";
 
 export const ProfileMenu = (props) => {
@@ -29,7 +29,6 @@ export const ProfileMenu = (props) => {
   const theme = useTheme();
   const classes = useStyles(theme);
   const currentUser = useSelector((state) => state.authentication.currentUser);
-  const dispatch = useDispatch();
 
   return (
     <React.Fragment>
