@@ -45,7 +45,7 @@ export function Lobby() {
   }, [dispatch, gameService, isAuthenticated, messageService, playerService]);
 
   return (
-    <Grid container>
+    <Grid container alignItems="center" justify="center">
       <GameList />
       <MessageList />
     </Grid>

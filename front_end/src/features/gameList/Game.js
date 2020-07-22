@@ -28,7 +28,7 @@ export const Game = (props) => {
   const dispatch = useDispatch();
 
   return (
-    <Grid item xs={4}>
+    <Grid item xs={12} md={4}>
       <Card
         raised
         className={clsx(classes.gameCard, {

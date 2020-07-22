@@ -6,6 +6,13 @@ import { updateGame, removeGame, selectGames } from "./gamesSlice";
 import client from "../../app/feather";
 import { Game } from "./Game";
 import { GameSetup } from "../table/GameSetup";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    padding: theme.spacing(1),
+  },
+}));
 
 export function GameList() {
   // const isAuthenticated = useSelector(selectIsAuthenticated);
@@ -13,6 +20,8 @@ export function GameList() {
   const games = useSelector(selectGames);
   const dispatch = useDispatch();
   const gameService = client.service("games");
+  const theme = useTheme();
+  const classes = useStyles(theme);
 
   useEffect(() => {
     const updateGameListener = (game) => {
@@ -35,7 +44,16 @@ export function GameList() {
   }, [dispatch, gameService]);
 
   return (
-    <Grid item container xs={6} spacing={4}>
+    <Grid
+      item
+      container
+      xs={12}
+      md={9}
+      spacing={4}
+      alignItems="center"
+      justify="center"
+      className={classes.root}
+    >
       <Grid item xs={12}>
         <Button onClick={() => gameService.create({})}>Create Game</Button>
       </Grid>
