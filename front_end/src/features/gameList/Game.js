@@ -13,12 +13,16 @@ import {
 import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import { useTheme } from '@material-ui/core/styles';
+import client from '../../app/feather';
 
 const useStyles = makeStyles((theme) => ({
   gameCard: {
     padding: theme.spacing(1),
   },
-  startedGameCard: {},
+  startedGameCard: {
+    color: theme.palette.secondary.contrastText,
+    backgroundColor: theme.palette.secondary.main,
+  },
 }));
 
 export const Game = (props) => {
@@ -26,6 +30,7 @@ export const Game = (props) => {
   const classes = useStyles(theme);
   const { game, setCurrent } = props;
   const dispatch = useDispatch();
+  const gameService = client.service('games');
 
   return (
     <Grid item xs={12} md={4}>
@@ -60,6 +65,13 @@ export const Game = (props) => {
                   })
                 );
                 console.log(`Tried to remove ${game.uuid}`);
+              }}
+            >
+              Toggle State
+            </Button>
+            <Button
+              onClick={() => {
+                gameService.remove(game.uuid);
               }}
             >
               Remove

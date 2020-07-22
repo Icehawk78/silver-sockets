@@ -6,6 +6,15 @@ import store from './app/store';
 import { Provider } from 'react-redux';
 import * as serviceWorker from './serviceWorker';
 
+store.subscribe(() => {
+  localStorage.setItem(
+    'redux.state',
+    JSON.stringify({
+      theme: store.getState().theme,
+    })
+  );
+});
+
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>

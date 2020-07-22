@@ -36,6 +36,9 @@ export const getTheme = (color, darkMode) => {
       primary: {
         main: darkMode ? colorMap[color][900] : colorMap[color][100],
       },
+      secondary: {
+        main: darkMode ? colorMap[color][100] : colorMap[color][900],
+      },
       contrastThreshold: 5,
       tonalOffset: 0.1,
     },

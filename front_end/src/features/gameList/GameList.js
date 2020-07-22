@@ -44,16 +44,7 @@ export function GameList() {
   }, [dispatch, gameService]);
 
   return (
-    <Grid
-      item
-      container
-      xs={12}
-      md={9}
-      spacing={4}
-      alignItems="center"
-      justify="center"
-      className={classes.root}
-    >
+    <Grid item container xs={12} md={9} spacing={4} className={classes.root}>
       <Grid item xs={12}>
         <Button onClick={() => gameService.create({})}>Create Game</Button>
       </Grid>
