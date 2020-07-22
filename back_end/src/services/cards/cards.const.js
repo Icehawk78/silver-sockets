@@ -8,6 +8,6 @@ module.exports = {
     VILLAGE2: 'village.2',
     VILLAGE3: 'village.3',
     VILLAGE4: 'village.4',
-    getVillage: number => `village.${number}`
-  }
+    getVillage: (number) => `village.${number}`,
+  },
 };

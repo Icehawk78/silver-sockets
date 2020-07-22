@@ -8,20 +8,20 @@ const cardResolvers = {
         .service('players')
         .get(card.cardTypeUuid);
     },
-    cardsSeenByPlayers: $select => async (card, context) => {
+    cardsSeenByPlayers: ($select) => async (card, context) => {
       card.cardsSeenByPlayers = await context.app
         .service('cardsSeenByPlayers')
         .find({
           query: { $select: $select, cardUuid: card.uuid },
-          paginate: false
+          paginate: false,
         });
-    }
-  }
+    },
+  },
 };
 
 const query = {
   cardTypes: true,
-  cardsSeenByPlayers: true
+  cardsSeenByPlayers: true,
 };
 
 module.exports = {
@@ -32,7 +32,7 @@ module.exports = {
     create: [],
     update: [],
     patch: [],
-    remove: []
+    remove: [],
   },
 
   after: {
@@ -42,7 +42,7 @@ module.exports = {
     create: [],
     update: [],
     patch: [],
-    remove: []
+    remove: [],
   },
 
   error: {
@@ -52,6 +52,6 @@ module.exports = {
     create: [],
     update: [],
     patch: [],
-    remove: []
-  }
+    remove: [],
+  },
 };

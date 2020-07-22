@@ -3,7 +3,7 @@
 const Sequelize = require('sequelize');
 const DataTypes = Sequelize.DataTypes;
 
-module.exports = function(app) {
+module.exports = function (app) {
   const sequelizeClient = app.get('sequelizeClient');
   const cardTypes = sequelizeClient.define(
     'cardTypes',
@@ -13,13 +13,13 @@ module.exports = function(app) {
         primaryKey: true,
         isUUID: 4,
         defaultValue: DataTypes.UUIDV4,
-        allowNull: false
+        allowNull: false,
       },
       name: { type: DataTypes.STRING },
       number: { type: DataTypes.INTEGER },
       deckAmount: { type: DataTypes.INTEGER },
       origin: { type: DataTypes.STRING },
-      abilityJson: { type: DataTypes.JSON }
+      abilityJson: { type: DataTypes.JSON },
     },
     {
       hooks: {
@@ -28,12 +28,12 @@ module.exports = function(app) {
         },
         async afterCreate(createdObject) {
           await createdObject.reload();
-        }
-      }
+        },
+      },
     }
   );
 
-  cardTypes.associate = function(models) {
+  cardTypes.associate = function (models) {
     const { cards } = models;
     cardTypes.hasMany(cards, { onDelete: 'CASCADE', hooks: true });
   };

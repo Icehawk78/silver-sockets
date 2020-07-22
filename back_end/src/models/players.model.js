@@ -3,7 +3,7 @@
 const Sequelize = require('sequelize');
 const DataTypes = Sequelize.DataTypes;
 
-module.exports = function(app) {
+module.exports = function (app) {
   const sequelizeClient = app.get('sequelizeClient');
   const players = sequelizeClient.define(
     'players',
@@ -12,20 +12,20 @@ module.exports = function(app) {
         type: DataTypes.UUID,
         primaryKey: true,
         defaultValue: DataTypes.UUIDV4,
-        allowNull: false
+        allowNull: false,
       },
       orderNumber: { type: DataTypes.INTEGER, allowNull: false },
       points: { type: DataTypes.INTEGER, allowNull: false, defaultValue: 0 },
       isCurrent: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
-        defaultValue: false
+        defaultValue: false,
       },
       isCalling: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
-        defaultValue: false
-      }
+        defaultValue: false,
+      },
     },
     {
       hooks: {
@@ -34,12 +34,12 @@ module.exports = function(app) {
         },
         async afterCreate(createdObject) {
           await createdObject.reload();
-        }
-      }
+        },
+      },
     }
   );
 
-  players.associate = function(models) {
+  players.associate = function (models) {
     const { games, users, cardsSeenByPlayers } = models;
     players.belongsTo(games);
     players.belongsTo(users);

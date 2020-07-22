@@ -4,5 +4,5 @@ module.exports = {
   NUMBERS_COUNT: 14,
   MIN_PLAYERS: 2,
   MAX_PLAYERS: 4,
-  TOTAL_ROUNDS: 4
+  TOTAL_ROUNDS: 4,
 };

@@ -1,14 +1,14 @@
-import React, { useEffect, useMemo } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { ThemeProvider } from "@material-ui/core/styles";
-import { CssBaseline } from "@material-ui/core";
-import { Lobby } from "./features/lobby/Lobby";
-import { Login } from "./features/authentication/Login";
-import { Header } from "./features/layout/Header";
-import { login, logout } from "./features/authentication/authenticationSlice";
-import { getTheme } from "./features/themes/Themes";
-import client from "./app/feather";
-import "./App.css";
+import React, { useEffect, useMemo } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { ThemeProvider } from '@material-ui/core/styles';
+import { CssBaseline } from '@material-ui/core';
+import { Lobby } from './features/lobby/Lobby';
+import { Login } from './features/authentication/Login';
+import { Header } from './features/layout/Header';
+import { login, logout } from './features/authentication/authenticationSlice';
+import { getTheme } from './features/themes/Themes';
+import client from './app/feather';
+import './App.css';
 
 function App() {
   const isAuthenticated = useSelector(
@@ -31,9 +31,9 @@ function App() {
       console.log(authData);
       dispatch(login(authData));
     };
-    client.on("authenticated", handleLogin);
+    client.on('authenticated', handleLogin);
     return () => {
-      client.removeListener("authenticated", handleLogin);
+      client.removeListener('authenticated', handleLogin);
     };
   }, [dispatch]);
 
@@ -41,9 +41,9 @@ function App() {
     const handleLogout = (authData) => {
       dispatch(logout());
     };
-    client.on("logout", handleLogout);
+    client.on('logout', handleLogout);
     return () => {
-      client.removeListener("logout", handleLogout);
+      client.removeListener('logout', handleLogout);
     };
   }, [dispatch]);
   return (

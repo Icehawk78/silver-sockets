@@ -1,12 +1,12 @@
-import { configureStore } from "@reduxjs/toolkit";
-import lobbyReducer from "../features/lobby/lobbySlice";
-import gamesReducer from "../features/gameList/gamesSlice";
-import authenticationReducer from "../features/authentication/authenticationSlice";
-import themeReducer from "../features/themes/themeSlice";
+import { configureStore } from '@reduxjs/toolkit';
+import lobbyReducer from '../features/lobby/lobbySlice';
+import gamesReducer from '../features/gameList/gamesSlice';
+import authenticationReducer from '../features/authentication/authenticationSlice';
+import themeReducer from '../features/themes/themeSlice';
 
 const loadState = () => {
   try {
-    const serializedState = localStorage.getItem("redux.state");
+    const serializedState = localStorage.getItem('redux.state');
     if (serializedState === null) {
       return undefined;
     }

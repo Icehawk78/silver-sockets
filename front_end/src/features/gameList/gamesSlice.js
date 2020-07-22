@@ -1,10 +1,10 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 export const gamesSlice = createSlice({
-  name: "games",
+  name: 'games',
   initialState: {
     games: {},
-    players: {}
+    players: {},
   },
   reducers: {
     loadGames: (state, action) => {
@@ -28,8 +28,8 @@ export const gamesSlice = createSlice({
         obj[player.uuid] = player;
         return obj;
       }, {});
-    }
-  }
+    },
+  },
 });
 
 export const {
@@ -37,11 +37,11 @@ export const {
   updateGame,
   updateGameAttribute,
   removeGame,
-  loadPlayers
+  loadPlayers,
 } = gamesSlice.actions;
 
-export const selectGameUuids = state => Object.keys(state.games.games);
-export const selectGames = state => Object.values(state.games.games);
+export const selectGameUuids = (state) => Object.keys(state.games.games);
+export const selectGames = (state) => Object.values(state.games.games);
 export const selectGame = (state, uuid) => state.games.games[uuid];
 
 export default gamesSlice.reducer;

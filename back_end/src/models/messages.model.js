@@ -3,7 +3,7 @@
 const Sequelize = require('sequelize');
 const DataTypes = Sequelize.DataTypes;
 
-module.exports = function(app) {
+module.exports = function (app) {
   const sequelizeClient = app.get('sequelizeClient');
   const messages = sequelizeClient.define(
     'messages',
@@ -12,17 +12,17 @@ module.exports = function(app) {
         type: DataTypes.UUID,
         primaryKey: true,
         defaultValue: DataTypes.UUIDV4,
-        allowNull: false
+        allowNull: false,
       },
       text: {
         type: Sequelize.STRING,
-        allowNull: false
-      }
+        allowNull: false,
+      },
     },
     {
       defaultScope: {
         raw: false,
-        include: [{ all: true }]
+        include: [{ all: true }],
       },
       hooks: {
         beforeCount(options) {
@@ -30,12 +30,12 @@ module.exports = function(app) {
         },
         async afterCreate(createdObject) {
           await createdObject.reload();
-        }
-      }
+        },
+      },
     }
   );
 
-  messages.associate = function(models) {
+  messages.associate = function (models) {
     const { games, users } = models;
     messages.belongsTo(games);
     messages.belongsTo(users);

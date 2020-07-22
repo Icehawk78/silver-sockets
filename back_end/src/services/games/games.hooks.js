@@ -6,24 +6,24 @@ const gameResolvers = {
     players: () => async (game, context) => {
       game.players = await context.app.service('players').find({
         query: { gameUuid: game.uuid },
-        paginate: false
+        paginate: false,
       });
     },
-    cards: $select => async (game, context) => {
+    cards: ($select) => async (game, context) => {
       game.cards = await context.app.service('cards').find({
         query: { $select: $select, gameUuid: game.uuid },
-        paginate: false
+        paginate: false,
       });
-    }
-  }
+    },
+  },
 };
 
 const query = {
   cards: [['cardTypeUuid']],
-  players: true
+  players: true,
 };
 
-const joinCreatedGame = async context => {
+const joinCreatedGame = async (context) => {
   await context.service.join(context.result, context.params.user.uuid);
   return context;
 };
@@ -36,7 +36,7 @@ module.exports = {
     create: [],
     update: [],
     patch: [],
-    remove: []
+    remove: [],
   },
 
   after: {
@@ -46,7 +46,7 @@ module.exports = {
     create: [joinCreatedGame],
     update: [],
     patch: [],
-    remove: []
+    remove: [],
   },
 
   error: {
@@ -56,6 +56,6 @@ module.exports = {
     create: [],
     update: [],
     patch: [],
-    remove: []
-  }
+    remove: [],
+  },
 };

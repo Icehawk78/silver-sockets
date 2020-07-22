@@ -7,5 +7,5 @@ module.exports = {
 
   down: async (queryInterface, Sequelize) => {
     await queryInterface.addColumn('users', 'twitterId', Sequelize.STRING);
-  }
+  },
 };

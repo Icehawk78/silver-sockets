@@ -6,8 +6,8 @@ module.exports = function (app) {
     dialect: 'postgres',
     logging: false,
     define: {
-      freezeTableName: true
-    }
+      freezeTableName: true,
+    },
   });
   const oldSetup = app.setup;
 
@@ -18,7 +18,7 @@ module.exports = function (app) {
 
     // Set up data relationships
     const models = sequelize.models;
-    Object.keys(models).forEach(name => {
+    Object.keys(models).forEach((name) => {
       if ('associate' in models[name]) {
         models[name].associate(models);
       }

@@ -7,15 +7,15 @@ module.exports = {
         type: Sequelize.UUID,
         primaryKey: true,
         defaultValue: Sequelize.UUIDV4,
-        allowNull: false
+        allowNull: false,
       },
       gameUuid: {
         type: Sequelize.UUID,
         onDelete: 'CASCADE',
         references: {
           model: 'games',
-          key: 'uuid'
-        }
+          key: 'uuid',
+        },
       },
       userUuid: {
         type: Sequelize.UUID,
@@ -23,25 +23,25 @@ module.exports = {
         onDelete: 'CASCADE',
         references: {
           model: 'users',
-          key: 'uuid'
-        }
+          key: 'uuid',
+        },
       },
       text: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
       },
       createdAt: {
         type: Sequelize.DATE,
-        allowNull: false
+        allowNull: false,
       },
       updatedAt: {
         type: Sequelize.DATE,
-        allowNull: false
-      }
+        allowNull: false,
+      },
     });
   },
 
-  down: async queryInterface => {
+  down: async (queryInterface) => {
     queryInterface.dropTable('messages');
-  }
+  },
 };

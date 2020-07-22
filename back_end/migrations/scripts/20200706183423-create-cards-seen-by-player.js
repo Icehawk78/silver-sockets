@@ -7,7 +7,7 @@ module.exports = {
         type: Sequelize.UUID,
         primaryKey: true,
         defaultValue: Sequelize.UUIDV4,
-        allowNull: false
+        allowNull: false,
       },
       gameUuid: {
         type: Sequelize.UUID,
@@ -15,8 +15,8 @@ module.exports = {
         onDelete: 'CASCADE',
         references: {
           model: 'games',
-          key: 'uuid'
-        }
+          key: 'uuid',
+        },
       },
       cardTypeUuid: {
         type: Sequelize.UUID,
@@ -24,8 +24,8 @@ module.exports = {
         onDelete: 'CASCADE',
         references: {
           model: 'card_types',
-          key: 'uuid'
-        }
+          key: 'uuid',
+        },
       },
       location: {
         type: Sequelize.ENUM,
@@ -37,34 +37,34 @@ module.exports = {
           'village.1',
           'village.2',
           'village.3',
-          'village.4'
+          'village.4',
         ],
         allowNull: false,
-        defaultValue: 'deck'
+        defaultValue: 'deck',
       },
       orderNumber: { type: Sequelize.INTEGER, allowNull: false },
       isFaceUp: {
         type: Sequelize.BOOLEAN,
         allowNull: false,
-        defaultValue: false
+        defaultValue: false,
       },
       isRotated: {
         type: Sequelize.BOOLEAN,
         allowNull: false,
-        defaultValue: false
+        defaultValue: false,
       },
       createdAt: {
         type: Sequelize.DATE,
-        allowNull: false
+        allowNull: false,
       },
       updatedAt: {
         type: Sequelize.DATE,
-        allowNull: false
-      }
+        allowNull: false,
+      },
     });
   },
 
-  down: async queryInterface => {
+  down: async (queryInterface) => {
     await queryInterface.dropTable('cards');
-  }
+  },
 };

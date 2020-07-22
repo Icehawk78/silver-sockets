@@ -3,7 +3,7 @@
 const Sequelize = require('sequelize');
 const DataTypes = Sequelize.DataTypes;
 
-module.exports = function(app) {
+module.exports = function (app) {
   const sequelizeClient = app.get('sequelizeClient');
   const cardsSeenByPlayers = sequelizeClient.define(
     'cardsSeenByPlayers',
@@ -12,8 +12,8 @@ module.exports = function(app) {
         type: DataTypes.UUID,
         primaryKey: true,
         defaultValue: DataTypes.UUIDV4,
-        allowNull: false
-      }
+        allowNull: false,
+      },
     },
     {
       hooks: {
@@ -22,12 +22,12 @@ module.exports = function(app) {
         },
         async afterCreate(createdObject) {
           await createdObject.reload();
-        }
-      }
+        },
+      },
     }
   );
 
-  cardsSeenByPlayers.associate = function(models) {
+  cardsSeenByPlayers.associate = function (models) {
     const { cards, players } = models;
     cardsSeenByPlayers.belongsTo(cards);
     cardsSeenByPlayers.belongsTo(players);

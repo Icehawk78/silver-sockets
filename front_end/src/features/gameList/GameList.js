@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { Grid, Button } from "@material-ui/core";
-import { updateGame, removeGame, selectGames } from "./gamesSlice";
+import React, { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { Grid, Button } from '@material-ui/core';
+import { updateGame, removeGame, selectGames } from './gamesSlice';
 // import { selectIsAuthenticated } from "../authentication/authenticationSlice";
-import client from "../../app/feather";
-import { Game } from "./Game";
-import { GameSetup } from "../table/GameSetup";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
+import client from '../../app/feather';
+import { Game } from './Game';
+import { GameSetup } from '../table/GameSetup';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -19,7 +19,7 @@ export function GameList() {
   const [currentGameUuid, setCurrentGameUuid] = useState(null);
   const games = useSelector(selectGames);
   const dispatch = useDispatch();
-  const gameService = client.service("games");
+  const gameService = client.service('games');
   const theme = useTheme();
   const classes = useStyles(theme);
 
@@ -33,13 +33,13 @@ export function GameList() {
       dispatch(removeGame(game));
     };
 
-    gameService.on("created", updateGameListener);
-    gameService.on("updated", updateGameListener);
-    gameService.on("removed", removeGameListener);
+    gameService.on('created', updateGameListener);
+    gameService.on('updated', updateGameListener);
+    gameService.on('removed', removeGameListener);
     return () => {
-      gameService.removeListener("created", updateGameListener);
-      gameService.removeListener("updated", updateGameListener);
-      gameService.removeListener("removed", removeGameListener);
+      gameService.removeListener('created', updateGameListener);
+      gameService.removeListener('updated', updateGameListener);
+      gameService.removeListener('removed', removeGameListener);
     };
   }, [dispatch, gameService]);
 

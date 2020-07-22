@@ -7,7 +7,7 @@ module.exports = {
         type: Sequelize.UUID,
         primaryKey: true,
         defaultValue: Sequelize.UUIDV4,
-        allowNull: false
+        allowNull: false,
       },
       currentRound: { type: Sequelize.INTEGER },
       previousTurnPlayerId: { type: Sequelize.UUID },
@@ -15,20 +15,20 @@ module.exports = {
       isStarted: {
         type: Sequelize.BOOLEAN,
         allowNull: false,
-        defaultValue: false
+        defaultValue: false,
       },
       createdAt: {
         type: Sequelize.DATE,
-        allowNull: false
+        allowNull: false,
       },
       updatedAt: {
         type: Sequelize.DATE,
-        allowNull: false
-      }
+        allowNull: false,
+      },
     });
   },
 
-  down: async queryInterface => {
+  down: async (queryInterface) => {
     await queryInterface.dropTable('games');
-  }
+  },
 };

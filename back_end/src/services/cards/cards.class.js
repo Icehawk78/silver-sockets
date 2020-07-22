@@ -14,9 +14,9 @@ exports.Cards = class Cards extends Service {
         super.find({
           query: {
             gameId: data.gameId,
-            location: locations.DECK
-          }
-        }).length + 1
+            location: locations.DECK,
+          },
+        }).length + 1,
     };
 
     return super.create(data, params);

@@ -3,10 +3,10 @@ const { CardsSeenByPlayers } = require('./cardsSeenByPlayers.class');
 const createModel = require('../../models/cardsSeenByPlayers.model');
 const hooks = require('./cardsSeenByPlayers.hooks');
 
-module.exports = function(app) {
+module.exports = function (app) {
   const options = {
     Model: createModel(app),
-    paginate: app.get('paginate')
+    paginate: app.get('paginate'),
   };
 
   // Initialize our service with any options it requires

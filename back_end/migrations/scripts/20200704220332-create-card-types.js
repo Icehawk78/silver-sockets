@@ -8,37 +8,37 @@ module.exports = {
         primaryKey: true,
         isUUID: 4,
         defaultValue: Sequelize.UUIDV4,
-        allowNull: false
+        allowNull: false,
       },
       name: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
       },
       number: {
         type: Sequelize.INTEGER,
-        allowNull: false
+        allowNull: false,
       },
       deckAmount: {
         type: Sequelize.INTEGER,
-        allowNull: false
+        allowNull: false,
       },
       origin: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
       },
       abilityJson: { type: Sequelize.JSON },
       createdAt: {
         type: Sequelize.DATE,
-        allowNull: false
+        allowNull: false,
       },
       updatedAt: {
         type: Sequelize.DATE,
-        allowNull: false
-      }
+        allowNull: false,
+      },
     });
   },
 
-  down: async queryInterface => {
+  down: async (queryInterface) => {
     await queryInterface.dropTable('card_types');
-  }
+  },
 };

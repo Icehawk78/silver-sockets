@@ -1,11 +1,11 @@
 const axios = require('axios');
 const {
   AuthenticationService,
-  JWTStrategy
+  JWTStrategy,
 } = require('@feathersjs/authentication');
 const {
   expressOauth,
-  OAuthStrategy
+  OAuthStrategy,
 } = require('@feathersjs/authentication-oauth');
 // const logger = require('./logger');
 
@@ -16,7 +16,7 @@ class GoogleStrategy extends OAuthStrategy {
     return {
       ...baseData,
       displayName: profile.name,
-      email: profile.email
+      email: profile.email,
     };
   }
 }
@@ -29,11 +29,11 @@ class FacebookStrategy extends OAuthStrategy {
 
     const { data } = await axios.get('https://graph.facebook.com/me', {
       headers: {
-        authorization: `Bearer ${accessToken}`
+        authorization: `Bearer ${accessToken}`,
       },
       params: {
-        fields: 'id,name,email,picture'
-      }
+        fields: 'id,name,email,picture',
+      },
     });
 
     return data;
@@ -46,12 +46,12 @@ class FacebookStrategy extends OAuthStrategy {
     return {
       ...baseData,
       displayName: profile.name,
-      email: profile.email
+      email: profile.email,
     };
   }
 }
 
-module.exports = app => {
+module.exports = (app) => {
   const authentication = new AuthenticationService(app);
 
   authentication.register('jwt', new JWTStrategy());

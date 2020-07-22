@@ -2,7 +2,7 @@
 const { v4: uuidv4 } = require('uuid');
 
 module.exports = {
-  up: async queryInterface => {
+  up: async (queryInterface) => {
     await queryInterface.bulkInsert(
       'cardTypes',
       [
@@ -20,7 +20,7 @@ module.exports = {
             "amount": 2, \
             "displayText": \
               "The round immediately ends when two Villagers are face up in any player\'s village." \
-          }'
+          }',
         },
         {
           uuid: uuidv4(),
@@ -35,7 +35,7 @@ module.exports = {
             "faceUpVillageAlways": "SQUIRE_FILL", \
             "amount": 1, \
             "displayText": "Display one card face up beside the deck." \
-          }'
+          }',
         },
         {
           uuid: uuidv4(),
@@ -50,7 +50,7 @@ module.exports = {
             "faceUpVillageAction": "SELF_PEEK", \
             "amount": 1, \
             "displayText": "Once per turn, you may peek at one of your cards." \
-          }'
+          }',
         },
         {
           uuid: uuidv4(),
@@ -65,7 +65,7 @@ module.exports = {
             "faceUpVillageAction": "PROTECT", \
             "displayText": \
               "Once per turn, you may protect or unprotect one of your cards with this." \
-          }'
+          }',
         },
         {
           uuid: uuidv4(),
@@ -81,7 +81,7 @@ module.exports = {
             "amount": 1, \
             "displayText": \
               "When drawing cards from the deck, you may draw one extra." \
-          }'
+          }',
         },
         {
           uuid: uuidv4(),
@@ -96,7 +96,7 @@ module.exports = {
             "playFromDeck": "SELF_FACEUP", \
             "amount": 1, \
             "displayText": "You may turn one of your cards faceup." \
-          }'
+          }',
         },
         {
           uuid: uuidv4(),
@@ -111,7 +111,7 @@ module.exports = {
             "playFromDeck": "ANY_FACEUP", \
             "amount": 1, \
             "displayText": "You may turn one card faceup." \
-          }'
+          }',
         },
         {
           uuid: uuidv4(),
@@ -126,7 +126,7 @@ module.exports = {
             "playFromDeck": "SELF_PEEK", \
             "amount": 2, \
             "displayText": "You may peek at one of your cards." \
-          }'
+          }',
         },
         {
           uuid: uuidv4(),
@@ -141,7 +141,7 @@ module.exports = {
             "playFromDeck": "OTHER_PEEK", \
             "amount": 1, \
             "displayText": "You may peek at one opponent\'s card." \
-          }'
+          }',
         },
         {
           uuid: uuidv4(),
@@ -156,7 +156,7 @@ module.exports = {
             "playFromDeck": "ANY_PEEK", \
             "amount": 1, \
             "displayText": "You may peek at one card." \
-          }'
+          }',
         },
         {
           uuid: uuidv4(),
@@ -171,7 +171,7 @@ module.exports = {
             "playFromDeck": "SELF_EXCHANGE_FROM_DISCARD", \
             "displayText": \
               "You may exchange cards with any card from the discard." \
-          }'
+          }',
         },
         {
           uuid: uuidv4(),
@@ -186,7 +186,7 @@ module.exports = {
             "playFromDeck": "ANY_EXCHANGE_FROM_DECK", \
             "displayText": \
               "View the top card of the deck and then exchange it with any village." \
-          }'
+          }',
         },
         {
           uuid: uuidv4(),
@@ -202,7 +202,7 @@ module.exports = {
             "amount": 1, \
             "displayText": \
               "You may swap one of your cards for a card in another player\'s village, and then peek at the new card." \
-          }'
+          }',
         },
         {
           uuid: uuidv4(),
@@ -217,14 +217,14 @@ module.exports = {
             "onDiscardAlways": "MIMIC_CARD", \
             "displayText": \
               "When exchanging cards, this can be treated as any number for determining matches." \
-          }'
-        }
+          }',
+        },
       ],
       {}
     );
   },
 
-  down: async queryInterface => {
+  down: async (queryInterface) => {
     await queryInterface.bulkDelete('cardTypes', { origin: 'Amulet' }, {});
-  }
+  },
 };

@@ -5,7 +5,7 @@ const {
   STARTING_CARDS_PER_VILLAGE,
   NUMBERS_COUNT,
   MIN_PLAYERS,
-  MAX_PLAYERS
+  MAX_PLAYERS,
   // TOTAL_ROUNDS
 } = require('./games.const');
 
@@ -24,8 +24,8 @@ exports.Games = class Games extends Service {
       ...new Set(
         await cards
           .find({ query: { gameId: this.id } })
-          .map(card => card.cardType.number)
-      )
+          .map((card) => card.cardType.number)
+      ),
     ];
   }
 
@@ -35,8 +35,8 @@ exports.Games = class Games extends Service {
     const gameCardsByNumber = cards.find({
       query: {
         gameUuid: this.uuid,
-        'cardTypes.number': cardType.number
-      }
+        'cardTypes.number': cardType.number,
+      },
     });
     if (gameCardsByNumber.length > 0) {
       return false;
@@ -45,7 +45,7 @@ exports.Games = class Games extends Service {
     cards.create(
       new Array(params.amount || cardType.deckAmount).fill({
         gameUuid: this.uuid,
-        cardTypeUuid: cardType.uuid
+        cardTypeUuid: cardType.uuid,
       })
     );
   }
@@ -55,8 +55,8 @@ exports.Games = class Games extends Service {
     cards.remove(null, {
       query: {
         gameUuid: this.uuid,
-        cardTypeUuid: data.cardTypeUuid
-      }
+        cardTypeUuid: data.cardTypeUuid,
+      },
     });
   }
 
@@ -66,8 +66,8 @@ exports.Games = class Games extends Service {
     const existingPlayers = await players.find({
       query: {
         gameUuid: game.uuid,
-        userUuid: uuid
-      }
+        userUuid: uuid,
+      },
     });
     if (game.isStarted || existingPlayers.length > 0) {
       return false;
@@ -75,7 +75,7 @@ exports.Games = class Games extends Service {
 
     await players.create({
       gameUuid: game.uuid,
-      userUuid: uuid
+      userUuid: uuid,
     });
   }
 
@@ -84,8 +84,8 @@ exports.Games = class Games extends Service {
     const existingPlayers = players.find({
       query: {
         gameUuid: this.uuid,
-        userUuid: params.user.uuid
-      }
+        userUuid: params.user.uuid,
+      },
     });
     if (existingPlayers.length == 0) {
       return false;
@@ -95,8 +95,8 @@ exports.Games = class Games extends Service {
       players.remove({
         query: {
           gameUuid: this.uuid,
-          userUuid: params.user.uuid
-        }
+          userUuid: params.user.uuid,
+        },
       });
     }
   }
@@ -118,7 +118,7 @@ exports.Games = class Games extends Service {
     currentPlayers.shuffle().forEach((player, index) => {
       players.patch(player.uuid, {
         orderNumber: index + 1,
-        isCurrent: index == 0
+        isCurrent: index == 0,
       });
     });
     currentCards.shuffle();
@@ -131,21 +131,21 @@ exports.Games = class Games extends Service {
       ) {
         cards.patch(currentCards[currentIndex].uuid, {
           location: locations.getVillage(village),
-          orderNumber: orderNumber
+          orderNumber: orderNumber,
         });
         currentIndex++;
       }
     }
     cards.patch(currentCards[currentIndex].uuid, {
       location: locations.DISCARD,
-      orderNumber: 0
+      orderNumber: 0,
     });
     currentIndex++;
     for (currentIndex; currentIndex < currentCards.length; currentIndex++) {
       cards.patch(currentCards[currentIndex].uuid, {
         location: locations.DECK,
         orderNumber:
-          currentIndex - VILLAGE_COUNT * STARTING_CARDS_PER_VILLAGE + 1
+          currentIndex - VILLAGE_COUNT * STARTING_CARDS_PER_VILLAGE + 1,
       });
     }
     super.patch(this.uuid, { isStarted: true, currentRound: 1 });

@@ -1,5 +1,5 @@
-import React from "react";
-import { AccountCircle } from "@material-ui/icons";
+import React from 'react';
+import { AccountCircle } from '@material-ui/icons';
 import {
   IconButton,
   Typography,
@@ -8,10 +8,10 @@ import {
   CardActions,
   CardContent,
   Button,
-} from "@material-ui/core";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
-import { useSelector } from "react-redux";
-import client from "../../app/feather";
+} from '@material-ui/core';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { useSelector } from 'react-redux';
+import client from '../../app/feather';
 
 export const ProfileMenu = (props) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -41,12 +41,12 @@ export const ProfileMenu = (props) => {
         open={Boolean(anchorEl)}
         onClose={handleClose}
         anchorOrigin={{
-          vertical: "bottom",
-          horizontal: "center",
+          vertical: 'bottom',
+          horizontal: 'center',
         }}
         transformOrigin={{
-          vertical: "top",
-          horizontal: "center",
+          vertical: 'top',
+          horizontal: 'center',
         }}
       >
         <Card className={classes.palette}>

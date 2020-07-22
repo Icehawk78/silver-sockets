@@ -7,7 +7,7 @@ module.exports = {
         type: Sequelize.UUID,
         primaryKey: true,
         defaultValue: Sequelize.UUIDV4,
-        allowNull: false
+        allowNull: false,
       },
       cardUuid: {
         type: Sequelize.UUID,
@@ -15,8 +15,8 @@ module.exports = {
         onDelete: 'CASCADE',
         references: {
           model: 'cards',
-          key: 'uuid'
-        }
+          key: 'uuid',
+        },
       },
       playerUuid: {
         type: Sequelize.UUID,
@@ -24,21 +24,21 @@ module.exports = {
         onDelete: 'CASCADE',
         references: {
           model: 'players',
-          key: 'uuid'
-        }
+          key: 'uuid',
+        },
       },
       createdAt: {
         type: Sequelize.DATE,
-        allowNull: false
+        allowNull: false,
       },
       updatedAt: {
         type: Sequelize.DATE,
-        allowNull: false
-      }
+        allowNull: false,
+      },
     });
   },
 
-  down: async queryInterface => {
+  down: async (queryInterface) => {
     await queryInterface.dropTable('cards');
-  }
+  },
 };

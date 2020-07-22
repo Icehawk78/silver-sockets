@@ -3,10 +3,10 @@ const { CardTypes } = require('./cardTypes.class');
 const createModel = require('../../models/cardTypes.model');
 const hooks = require('./cardTypes.hooks');
 
-module.exports = function(app) {
+module.exports = function (app) {
   const options = {
     Model: createModel(app),
-    paginate: app.get('paginate')
+    paginate: app.get('paginate'),
   };
 
   // Initialize our service with any options it requires

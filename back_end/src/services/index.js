@@ -7,7 +7,7 @@ const cards = require('./cards/cards.service.js');
 const cardsSeenByPlayers = require('./cardsSeenByPlayers/cardsSeenByPlayers.service.js');
 const messages = require('./messages/messages.service.js');
 // eslint-disable-next-line no-unused-vars
-module.exports = function(app) {
+module.exports = function (app) {
   app.configure(users);
   app.configure(games);
   app.configure(players);

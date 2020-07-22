@@ -1,6 +1,6 @@
-import React from "react";
-import { useDispatch } from "react-redux";
-import { updateGameAttribute } from "./gamesSlice";
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import { updateGameAttribute } from './gamesSlice';
 import {
   Grid,
   ButtonGroup,
@@ -9,10 +9,10 @@ import {
   CardActions,
   CardContent,
   Typography,
-} from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
-import clsx from "clsx";
-import { useTheme } from "@material-ui/core/styles";
+} from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+import clsx from 'clsx';
+import { useTheme } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
   gameCard: {
@@ -55,7 +55,7 @@ export const Game = (props) => {
                 dispatch(
                   updateGameAttribute({
                     uuid: game.uuid,
-                    attribute: "isStarted",
+                    attribute: 'isStarted',
                     value: !game.isStarted,
                   })
                 );

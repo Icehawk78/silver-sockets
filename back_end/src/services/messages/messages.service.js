@@ -3,10 +3,10 @@ const { Messages } = require('./messages.class');
 const createModel = require('../../models/messages.model');
 const hooks = require('./messages.hooks');
 
-module.exports = function(app) {
+module.exports = function (app) {
   const options = {
     Model: createModel(app),
-    paginate: app.get('paginate')
+    paginate: app.get('paginate'),
   };
 
   // Initialize our service with any options it requires

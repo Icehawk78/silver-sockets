@@ -7,7 +7,7 @@ module.exports = {
         type: Sequelize.UUID,
         primaryKey: true,
         defaultValue: Sequelize.UUIDV4,
-        allowNull: false
+        allowNull: false,
       },
       gameUuid: {
         type: Sequelize.UUID,
@@ -15,16 +15,16 @@ module.exports = {
         onDelete: 'CASCADE',
         references: {
           model: 'games',
-          key: 'uuid'
-        }
+          key: 'uuid',
+        },
       },
       playerUuid: {
         type: Sequelize.UUID,
         onDelete: 'CASCADE',
         references: {
           model: 'players',
-          key: 'uuid'
-        }
+          key: 'uuid',
+        },
       },
       location: {
         type: Sequelize.ENUM,
@@ -36,29 +36,29 @@ module.exports = {
           'village.1',
           'village.2',
           'village.3',
-          'village.4'
+          'village.4',
         ],
         allowNull: false,
-        defaultValue: 'removed'
+        defaultValue: 'removed',
       },
       orderNumber: { type: Sequelize.INTEGER },
       isUsed: {
         type: Sequelize.BOOLEAN,
         allowNull: false,
-        defaultValue: false
+        defaultValue: false,
       },
       createdAt: {
         type: Sequelize.DATE,
-        allowNull: false
+        allowNull: false,
       },
       updatedAt: {
         type: Sequelize.DATE,
-        allowNull: false
-      }
+        allowNull: false,
+      },
     });
   },
 
-  down: async queryInterface => {
+  down: async (queryInterface) => {
     queryInterface.dropTable('gameSilverToken');
-  }
+  },
 };

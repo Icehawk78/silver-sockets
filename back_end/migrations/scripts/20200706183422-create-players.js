@@ -7,7 +7,7 @@ module.exports = {
         type: Sequelize.UUID,
         primaryKey: true,
         defaultValue: Sequelize.UUIDV4,
-        allowNull: false
+        allowNull: false,
       },
       gameUuid: {
         type: Sequelize.UUID,
@@ -15,8 +15,8 @@ module.exports = {
         onDelete: 'CASCADE',
         references: {
           model: 'games',
-          key: 'uuid'
-        }
+          key: 'uuid',
+        },
       },
       userUuid: {
         type: Sequelize.UUID,
@@ -24,33 +24,33 @@ module.exports = {
         onDelete: 'CASCADE',
         references: {
           model: 'users',
-          key: 'uuid'
-        }
+          key: 'uuid',
+        },
       },
       orderNumber: { type: Sequelize.INTEGER, allowNull: false },
       points: { type: Sequelize.INTEGER, allowNull: false, defaultValue: 0 },
       isCurrent: {
         type: Sequelize.BOOLEAN,
         allowNull: false,
-        defaultValue: false
+        defaultValue: false,
       },
       isCalling: {
         type: Sequelize.BOOLEAN,
         allowNull: false,
-        defaultValue: false
+        defaultValue: false,
       },
       createdAt: {
         type: Sequelize.DATE,
-        allowNull: false
+        allowNull: false,
       },
       updatedAt: {
         type: Sequelize.DATE,
-        allowNull: false
-      }
+        allowNull: false,
+      },
     });
   },
 
-  down: async queryInterface => {
+  down: async (queryInterface) => {
     await queryInterface.dropTable('players');
-  }
+  },
 };

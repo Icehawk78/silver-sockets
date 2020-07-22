@@ -6,7 +6,6 @@ module.exports = {
   [env]: {
     dialect,
     url: app.get(dialect),
-    migrationStorageTableName: '_migrations'
-  }
+    migrationStorageTableName: '_migrations',
+  },
 };
-

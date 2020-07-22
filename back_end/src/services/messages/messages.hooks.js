@@ -1,15 +1,15 @@
 const { authenticate } = require('@feathersjs/authentication').hooks;
 
-const nestedProps = context => {
+const nestedProps = (context) => {
   if (!context.params.sequelize) context.params.sequelize = {};
   Object.assign(context.params.sequelize, {
     include: [{ all: true }],
-    raw: false
+    raw: false,
   });
   return context;
 };
 
-const setSender = async context => {
+const setSender = async (context) => {
   context.data.userUuid = context.params.user.uuid;
   return context;
 };
@@ -22,7 +22,7 @@ module.exports = {
     create: [setSender],
     update: [],
     patch: [],
-    remove: []
+    remove: [],
   },
 
   after: {
@@ -32,7 +32,7 @@ module.exports = {
     create: [],
     update: [],
     patch: [],
-    remove: []
+    remove: [],
   },
 
   error: {
@@ -42,6 +42,6 @@ module.exports = {
     create: [],
     update: [],
     patch: [],
-    remove: []
-  }
+    remove: [],
+  },
 };

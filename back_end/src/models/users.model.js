@@ -3,7 +3,7 @@
 const Sequelize = require('sequelize');
 const DataTypes = Sequelize.DataTypes;
 
-module.exports = function(app) {
+module.exports = function (app) {
   const sequelizeClient = app.get('sequelizeClient');
   const users = sequelizeClient.define(
     'users',
@@ -13,12 +13,12 @@ module.exports = function(app) {
         primaryKey: true,
         isUUID: 4,
         defaultValue: DataTypes.UUIDV4,
-        allowNull: false
+        allowNull: false,
       },
       email: { type: DataTypes.STRING },
       displayName: { type: DataTypes.STRING },
       googleId: { type: DataTypes.STRING },
-      facebookId: { type: DataTypes.STRING }
+      facebookId: { type: DataTypes.STRING },
     },
     {
       hooks: {
@@ -27,12 +27,12 @@ module.exports = function(app) {
         },
         async afterCreate(createdObject) {
           await createdObject.reload();
-        }
-      }
+        },
+      },
     }
   );
 
-  users.associate = function(models) {
+  users.associate = function (models) {
     const { players } = models;
     users.hasMany(players, { onDelete: 'CASCADE', hooks: true });
   };

@@ -1,5 +1,5 @@
-import React from "react";
-import { createMuiTheme } from "@material-ui/core/styles";
+import React from 'react';
+import { createMuiTheme } from '@material-ui/core/styles';
 import {
   blueGrey,
   cyan,
@@ -7,8 +7,8 @@ import {
   blue,
   teal,
   indigo,
-} from "@material-ui/core/colors";
-import { Palette } from "@material-ui/icons";
+} from '@material-ui/core/colors';
+import { Palette } from '@material-ui/icons';
 import {
   IconButton,
   Typography,
@@ -16,10 +16,10 @@ import {
   Grid,
   Paper,
   Switch,
-} from "@material-ui/core";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
-import { toggleDarkMode, setHue } from "./themeSlice";
-import { useSelector, useDispatch } from "react-redux";
+} from '@material-ui/core';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { toggleDarkMode, setHue } from './themeSlice';
+import { useSelector, useDispatch } from 'react-redux';
 
 const colorMap = {
   blueGrey: blueGrey,
@@ -32,7 +32,7 @@ const colorMap = {
 export const getTheme = (color, darkMode) => {
   return createMuiTheme({
     palette: {
-      type: darkMode ? "dark" : "light",
+      type: darkMode ? 'dark' : 'light',
       primary: {
         main: darkMode ? colorMap[color][900] : colorMap[color][100],
       },
@@ -72,12 +72,12 @@ export const ThemePicker = (props) => {
         open={Boolean(anchorEl)}
         onClose={handleClose}
         anchorOrigin={{
-          vertical: "bottom",
-          horizontal: "center",
+          vertical: 'bottom',
+          horizontal: 'center',
         }}
         transformOrigin={{
-          vertical: "top",
-          horizontal: "center",
+          vertical: 'top',
+          horizontal: 'center',
         }}
       >
         <Paper className={classes.palette}>

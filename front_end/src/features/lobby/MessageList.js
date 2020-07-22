@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { addMessage, removeMessage, selectMessages } from "./lobbySlice";
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { addMessage, removeMessage, selectMessages } from './lobbySlice';
 import {
   Grid,
   Button,
@@ -12,9 +12,9 @@ import {
   TableBody,
   TableRow,
   TableCell,
-} from "@material-ui/core";
-import client from "../../app/feather";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
+} from '@material-ui/core';
+import client from '../../app/feather';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -24,9 +24,9 @@ const useStyles = makeStyles((theme) => ({
 
 export function MessageList() {
   const messages = useSelector(selectMessages);
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState('');
   const dispatch = useDispatch();
-  const messageService = client.service("messages");
+  const messageService = client.service('messages');
   const theme = useTheme();
   const classes = useStyles(theme);
 
@@ -40,11 +40,11 @@ export function MessageList() {
       dispatch(removeMessage(message));
     };
 
-    messageService.on("created", addMessageListener);
-    messageService.on("removed", removeMessageListener);
+    messageService.on('created', addMessageListener);
+    messageService.on('removed', removeMessageListener);
     return () => {
-      messageService.removeListener("created", addMessageListener);
-      messageService.removeListener("removed", removeMessageListener);
+      messageService.removeListener('created', addMessageListener);
+      messageService.removeListener('removed', removeMessageListener);
     };
   }, [dispatch, messageService]);
 

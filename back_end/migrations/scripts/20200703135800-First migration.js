@@ -24,11 +24,11 @@ module.exports = {
       updatedAt: {
         type: Sequelize.DATE,
         allowNull: false,
-      }
+      },
     });
   },
 
   down: async (queryInterface) => {
     await queryInterface.dropTable('users');
-  }
+  },
 };

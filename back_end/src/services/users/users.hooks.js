@@ -7,27 +7,27 @@ const userResolvers = {
       user.player = (
         await context.app.service('players').find({
           query: { userUuid: user.uuid },
-          paginate: false
+          paginate: false,
         })
       )[0];
     },
-    game: $select => async (user, context) => {
+    game: ($select) => async (user, context) => {
       user.game = (
         await context.app.service('games').find({
           query: { $select: $select },
           sequelize: {
-            scope: ['unfinished', { method: ['includesUser', user.uuid] }]
+            scope: ['unfinished', { method: ['includesUser', user.uuid] }],
           },
-          paginate: false
+          paginate: false,
         })
       )[0];
-    }
-  }
+    },
+  },
 };
 
 const query = {
   game: [['uuid', 'isStarted', 'currentRound']],
-  player: true
+  player: true,
 };
 
 module.exports = {
@@ -38,7 +38,7 @@ module.exports = {
     create: [],
     update: [authenticate('jwt')],
     patch: [authenticate('jwt')],
-    remove: [authenticate('jwt')]
+    remove: [authenticate('jwt')],
   },
 
   after: {
@@ -48,7 +48,7 @@ module.exports = {
     create: [],
     update: [],
     patch: [],
-    remove: []
+    remove: [],
   },
 
   error: {
@@ -58,6 +58,6 @@ module.exports = {
     create: [],
     update: [],
     patch: [],
-    remove: []
-  }
+    remove: [],
+  },
 };

@@ -3,7 +3,7 @@
 const Sequelize = require('sequelize');
 const DataTypes = Sequelize.DataTypes;
 
-module.exports = function(app) {
+module.exports = function (app) {
   const sequelizeClient = app.get('sequelizeClient');
   const cards = sequelizeClient.define(
     'cards',
@@ -12,7 +12,7 @@ module.exports = function(app) {
         type: DataTypes.UUID,
         primaryKey: true,
         defaultValue: DataTypes.UUIDV4,
-        allowNull: false
+        allowNull: false,
       },
       location: {
         type: DataTypes.ENUM,
@@ -24,22 +24,22 @@ module.exports = function(app) {
           'village.1',
           'village.2',
           'village.3',
-          'village.4'
+          'village.4',
         ],
         allowNull: false,
-        defaultValue: 'deck'
+        defaultValue: 'deck',
       },
       orderNumber: { type: Sequelize.INTEGER, allowNull: false },
       isFaceUp: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
-        defaultValue: false
+        defaultValue: false,
       },
       isRotated: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
-        defaultValue: false
-      }
+        defaultValue: false,
+      },
     },
     {
       hooks: {
@@ -48,12 +48,12 @@ module.exports = function(app) {
         },
         async afterCreate(createdObject) {
           await createdObject.reload();
-        }
-      }
+        },
+      },
     }
   );
 
-  cards.associate = function(models) {
+  cards.associate = function (models) {
     const { games, cardTypes, cardsSeenByPlayers } = models;
     cards.belongsTo(cardTypes);
     cards.belongsTo(games);

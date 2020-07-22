@@ -1,10 +1,10 @@
-import React from "react";
-import { useSelector } from "react-redux";
-import { AppBar, Toolbar, IconButton, Typography } from "@material-ui/core";
-import { Menu as MenuIcon } from "@material-ui/icons";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
-import { ThemePicker } from "../themes/Themes";
-import { ProfileMenu } from "../authentication/ProfileMenu";
+import React from 'react';
+import { useSelector } from 'react-redux';
+import { AppBar, Toolbar, IconButton, Typography } from '@material-ui/core';
+import { Menu as MenuIcon } from '@material-ui/icons';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { ThemePicker } from '../themes/Themes';
+import { ProfileMenu } from '../authentication/ProfileMenu';
 
 export const Header = (props) => {
   const useStyles = makeStyles((theme) => ({
@@ -15,9 +15,9 @@ export const Header = (props) => {
       marginRight: theme.spacing(2),
     },
     title: {
-      display: "none",
-      [theme.breakpoints.up("sm")]: {
-        display: "block",
+      display: 'none',
+      [theme.breakpoints.up('sm')]: {
+        display: 'block',
       },
     },
   }));
