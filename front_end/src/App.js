@@ -2,9 +2,8 @@ import React, { useEffect, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { ThemeProvider } from '@material-ui/core/styles';
 import { CssBaseline } from '@material-ui/core';
-import { Lobby } from './features/lobby/Lobby';
+import { AppLayout } from './features/layout/AppLayout';
 import { Login } from './features/authentication/Login';
-import { Header } from './features/layout/Header';
 import { login, logout } from './features/authentication/authenticationSlice';
 import { getTheme } from './features/themes/Themes';
 import client from './app/feather';
@@ -49,13 +48,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      {!isAuthenticated && <Login />}
-      {isAuthenticated && (
-        <React.Fragment>
-          <Header />
-          <Lobby />
-        </React.Fragment>
-      )}
+      {isAuthenticated ? <AppLayout /> : <Login />}
     </ThemeProvider>
   );
 }
