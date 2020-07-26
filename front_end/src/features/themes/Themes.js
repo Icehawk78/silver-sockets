@@ -8,7 +8,11 @@ import {
   teal,
   indigo,
 } from '@material-ui/core/colors';
-import { Palette } from '@material-ui/icons';
+import {
+  Palette,
+  RadioButtonUnchecked,
+  RadioButtonChecked,
+} from '@material-ui/icons';
 import {
   IconButton,
   Typography,
@@ -29,6 +33,7 @@ const colorMap = {
   teal: teal,
   indigo: indigo,
 };
+const colors = Object.keys(colorMap);
 export const getTheme = (color, darkMode) => {
   return createMuiTheme({
     palette: {
@@ -53,7 +58,16 @@ export const ThemePicker = (props) => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+  const colorStyles = colors.reduce((styles, color) => {
+    return {
+      ...styles,
+      [color]: {
+        color: colorMap[color][500],
+      },
+    };
+  }, {});
   const useStyles = makeStyles((theme) => ({
+    ...colorStyles,
     palette: {
       padding: theme.spacing(2),
     },
@@ -84,7 +98,7 @@ export const ThemePicker = (props) => {
         }}
       >
         <Paper className={classes.palette}>
-          <Grid container spacing={0}>
+          <Grid container spacing={1} zeroMinWidth>
             <Grid item xs={12}>
               <Typography>Dark Mode</Typography>
               <Switch
@@ -92,6 +106,21 @@ export const ThemePicker = (props) => {
                 onChange={() => dispatch(toggleDarkMode())}
               />
             </Grid>
+            {Object.keys(colorMap).map((color) => (
+              <Grid item xs={2}>
+                <IconButton
+                  size="small"
+                  className={classes[color]}
+                  onClick={() => dispatch(setHue(color))}
+                >
+                  {color === hue ? (
+                    <RadioButtonChecked />
+                  ) : (
+                    <RadioButtonUnchecked />
+                  )}
+                </IconButton>
+              </Grid>
+            ))}
           </Grid>
         </Paper>
       </Popover>

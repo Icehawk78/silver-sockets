@@ -3,7 +3,7 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.addColumn('users', 'isOnline', {
-      type: Sequelize.Boolean,
+      type: Sequelize.BOOLEAN,
       allowNull: false,
       defaultValue: false,
     });
