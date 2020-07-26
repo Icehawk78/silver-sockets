@@ -61,7 +61,7 @@ export function MessageList() {
           Create Message
         </Button>
       </Grid>
-      <Grid xs={12}>
+      <Grid item xs={12}>
         <TableContainer component={Paper}>
           <Table size="small">
             <TableHead>

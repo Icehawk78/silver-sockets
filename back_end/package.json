@@ -26,8 +26,8 @@
   "scripts": {
     "test": "npm run lint && npm run jest",
     "lint": "eslint src/. test/. --config .eslintrc.json",
-    "dev": "sequelize db:migrate && nodemon src/",
-    "start": "sequelize db:migrate && node src/",
+    "dev": "sequelize db:migrate && sequelize db:seed:all && nodemon src/",
+    "start": "sequelize db:migrate && sequelize db:seed:all && node src/",
     "jest": "jest  --forceExit"
   },
   "standard": {

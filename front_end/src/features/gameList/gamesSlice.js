@@ -14,7 +14,10 @@ export const gamesSlice = createSlice({
       }, {});
     },
     updateGame: (state, action) => {
+      console.log('Start update game', action);
       state.games[action.payload.uuid] = action.payload;
+      action.payload.players.forEach((p) => (state.players[p.uuid] = p));
+      console.log('Finish update game');
     },
     updateGameAttribute: (state, action) => {
       state.games[action.payload.uuid][action.payload.attribute] =
@@ -29,6 +32,33 @@ export const gamesSlice = createSlice({
         return obj;
       }, {});
     },
+    updatePlayer: (state, action) => {
+      state.players[action.payload.uuid] = action.payload;
+      if (state.games[action.payload.gameUuid]) {
+        const playerIndex = state.games[
+          action.payload.gameUuid
+        ].players.findIndex((p) => (p.uuid = action.payload.uuid));
+        if (playerIndex) {
+          state.games[action.payload.gameUuid].players[playerIndex] = {
+            ...state.games[action.payload.gameUuid].players[playerIndex],
+            ...action.payload,
+          };
+        } else {
+          state.games[action.payload.gameUuid].players.push(action.payload);
+        }
+      } else {
+        state.games[action.payload.gameUuid] = {
+          ...action.payload.game,
+          players: [action.payload],
+        };
+      }
+    },
+    removePlayer: (state, action) => {
+      delete state.players[action.payload.uuid];
+      state.games[action.payload.gameUuid].players = state.games[
+        action.payload.gameUuid
+      ].players.filter((p) => p.uuid !== action.payload.uuid);
+    },
   },
 });
 
@@ -38,6 +68,8 @@ export const {
   updateGameAttribute,
   removeGame,
   loadPlayers,
+  updatePlayer,
+  removePlayer,
 } = gamesSlice.actions;
 
 export const selectGameUuids = (state) => Object.keys(state.games.games);

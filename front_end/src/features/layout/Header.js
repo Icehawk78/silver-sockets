@@ -33,7 +33,7 @@ export const Header = (props) => {
         <IconButton edge="start" className={classes.menuButton}>
           <MenuIcon />
         </IconButton>
-        <Typography className={classes.title} variant="h6" nowrap>
+        <Typography className={classes.title} variant="h6">
           Silver
         </Typography>
         <div className={classes.grow} />

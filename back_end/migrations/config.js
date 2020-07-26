@@ -7,5 +7,7 @@ module.exports = {
     dialect,
     url: app.get(dialect),
     migrationStorageTableName: '_migrations',
+    seederStorage: 'sequelize',
+    seederStorageTableName: '_seeds',
   },
 };

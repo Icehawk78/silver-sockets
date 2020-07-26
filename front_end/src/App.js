@@ -21,6 +21,7 @@ function App() {
   useEffect(() => {
     client.authenticate().catch((x) => {
       console.log(x);
+      localStorage.removeItem('feathers-jwt');
       dispatch(logout());
     });
   }, [dispatch]);

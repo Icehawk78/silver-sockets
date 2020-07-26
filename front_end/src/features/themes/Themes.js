@@ -98,7 +98,7 @@ export const ThemePicker = (props) => {
         }}
       >
         <Paper className={classes.palette}>
-          <Grid container spacing={1} zeroMinWidth>
+          <Grid container spacing={1}>
             <Grid item xs={12}>
               <Typography>Dark Mode</Typography>
               <Switch
@@ -107,7 +107,7 @@ export const ThemePicker = (props) => {
               />
             </Grid>
             {Object.keys(colorMap).map((color) => (
-              <Grid item xs={2}>
+              <Grid item xs={2} key={color}>
                 <IconButton
                   size="small"
                   className={classes[color]}

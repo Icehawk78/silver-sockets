@@ -61,7 +61,6 @@ exports.Games = class Games extends Service {
   }
 
   async join(game, uuid) {
-    console.log(game);
     const players = this.app.service('players');
     const existingPlayers = await players.find({
       query: {
@@ -73,7 +72,7 @@ exports.Games = class Games extends Service {
       return false;
     }
 
-    await players.create({
+    return await players.create({
       gameUuid: game.uuid,
       userUuid: uuid,
     });

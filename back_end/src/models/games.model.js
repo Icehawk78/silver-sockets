@@ -18,7 +18,6 @@ module.exports = function (app) {
       },
       currentRound: { type: DataTypes.INTEGER },
       previousTurnPlayerId: { type: DataTypes.UUID },
-      silverToken: { type: DataTypes.STRING },
       isStarted: {
         type: DataTypes.BOOLEAN,
         allowNull: false,

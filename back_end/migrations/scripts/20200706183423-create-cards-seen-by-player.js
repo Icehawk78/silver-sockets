@@ -23,7 +23,7 @@ module.exports = {
         allowNull: false,
         onDelete: 'CASCADE',
         references: {
-          model: 'card_types',
+          model: 'cardTypes',
           key: 'uuid',
         },
       },

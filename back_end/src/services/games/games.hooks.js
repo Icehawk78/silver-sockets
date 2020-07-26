@@ -24,7 +24,11 @@ const query = {
 };
 
 const joinCreatedGame = async (context) => {
-  await context.service.join(context.result, context.params.user.uuid);
+  const newPlayer = await context.service.join(
+    context.result,
+    context.params.user.uuid
+  );
+  context.result.players.push(newPlayer);
   return context;
 };
 
