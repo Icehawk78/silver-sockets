@@ -22,7 +22,7 @@ import {
   Switch,
 } from '@material-ui/core';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
-import { toggleDarkMode, setHue } from './themeSlice';
+import { toggleDarkMode, setHue } from './theme.slice';
 import { useSelector, useDispatch } from 'react-redux';
 
 const colorMap = {

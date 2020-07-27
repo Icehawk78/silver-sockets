@@ -3,7 +3,7 @@ import {
   removeGame,
   updatePlayer,
   removePlayer,
-} from './gamesSlice';
+} from './games.slice';
 import client from '../../app/feather';
 
 export const updateGameListeners = (dispatch) => () => {

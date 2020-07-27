@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { loadMessages } from './lobbySlice';
-import { loadGames, loadPlayers } from '../gameList/gamesSlice';
-import { selectIsAuthenticated } from '../authentication/authenticationSlice';
+import { loadMessages } from './lobby.slice';
+import { loadGames, loadPlayers } from '../gameList/games.slice';
+import { selectIsAuthenticated } from '../authentication/authentication.slice';
 import client from '../../app/feather';
 import { Grid } from '@material-ui/core';
 import { GameList } from '../gameList/GameList';

@@ -1,9 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
-import authenticationReducer from '../features/authentication/authenticationSlice';
-import themeReducer from '../features/themes/themeSlice';
-import lobbyReducer from '../features/lobby/lobbySlice';
-import gamesReducer from '../features/gameList/gamesSlice';
-import cardTypesReducer from '../features/table/cardTypesSlice';
+import authenticationReducer from '../features/authentication/authentication.slice';
+import themeReducer from '../features/themes/theme.slice';
+import lobbyReducer from '../features/lobby/lobby.slice';
+import gamesReducer from '../features/gameList/games.slice';
+import cardTypesReducer from '../features/table/cardTypes.slice';
 
 const loadState = () => {
   try {

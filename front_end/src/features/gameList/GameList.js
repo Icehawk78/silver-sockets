@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Grid, Button } from '@material-ui/core';
-import { selectGames } from './gamesSlice';
+import { selectGames } from './games.slice';
 // import { selectIsAuthenticated } from "../authentication/authenticationSlice";
 import client from '../../app/feather';
 import { Game } from './Game';

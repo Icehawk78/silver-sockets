@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { addMessage, removeMessage, selectMessages } from './lobbySlice';
+import { addMessage, removeMessage, selectMessages } from './lobby.slice';
 import {
   Grid,
   Button,

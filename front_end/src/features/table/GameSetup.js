@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectIsAuthenticated } from '../authentication/authenticationSlice';
-import { updateGame } from '../gameList/gamesSlice';
-import { loadCardTypes, loadSilverTokens } from './cardTypesSlice';
+import { selectIsAuthenticated } from '../authentication/authentication.slice';
+import { updateGame } from '../gameList/games.slice';
+import { loadCardTypes, loadSilverTokens } from './cardTypes.slice';
 import client from '../../app/feather';
 import { NUMBERS_COUNT } from './games.const';
 import { Grid, Typography, Card, Button } from '@material-ui/core';
